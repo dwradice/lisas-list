@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema(
     seller: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
+      required: [true, 'Product must be associated with user id'],
     },
     price: {
       type: Number,
@@ -20,7 +21,7 @@ const productSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: new Date(),
+      default: new Date(Date.now()).toLocaleString(),
     },
     slug: String,
     category: {

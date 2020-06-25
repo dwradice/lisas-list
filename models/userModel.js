@@ -57,17 +57,17 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// userSchema.virtual('reviews', {
-//     ref: 'Review',
-//     foreignField: 'seller',
-//     localField: '_id'
-// })
-
-userSchema.virtual('products', {
-  ref: 'Product',
+userSchema.virtual('reviews', {
+  ref: 'Review',
   foreignField: 'seller',
   localField: '_id',
 });
+
+// userSchema.virtual('products', {
+//   ref: 'Product',
+//   foreignField: 'seller',
+//   localField: '_id',
+// });
 
 // userSchema.virtual('purchases', {
 //   ref: 'Purchase',

@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const compression = require('compression');
 
 const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
 
@@ -53,5 +54,6 @@ app.use(
 app.use(compression());
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 module.exports = app;
