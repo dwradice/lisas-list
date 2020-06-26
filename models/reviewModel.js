@@ -40,6 +40,21 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
+reviewSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'seller',
+  })
+    .populate({
+      path: 'buyer',
+      select: 'name',
+    })
+    .populate({
+      path: 'product',
+      select: '-seller -createdAt',
+    });
+  next();
+});
+
 reviewSchema.statics.calcReputation = async function (userID) {
   const stats = await this.aggregate([
     {
@@ -59,24 +74,9 @@ reviewSchema.statics.calcReputation = async function (userID) {
   });
 };
 
-reviewSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'seller',
-    select: 'name reputation',
-  })
-    .populate({
-      path: 'buyer',
-      select: 'name',
-    })
-    .populate({
-      path: 'product',
-      select: '-seller -createdAt',
-    });
+reviewSchema.post(/save|^findOneAnd/, async function (doc, next) {
+  await doc.constructor.calcReputation(doc.seller._id);
   next();
-});
-
-reviewSchema.post('save', function () {
-  this.constructor.calcReputation(this.seller);
 });
 
 const Review = mongoose.model('Review', reviewSchema);

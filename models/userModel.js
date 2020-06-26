@@ -57,6 +57,25 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.pre('save', async function (next) {
+  // Only will run if password has been modified
+  if (!this.isModified('password')) return next();
+
+  // Hash Password
+  this.password = await bcrypt.hash(this.password, 12);
+
+  // Remove passwordConfirm field
+  this.passwordConfirm = undefined;
+  next();
+});
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
 userSchema.virtual('products', {
   ref: 'Product',
   foreignField: 'seller',

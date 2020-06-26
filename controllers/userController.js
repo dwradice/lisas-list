@@ -8,6 +8,5 @@ exports.getUser = factory.getOne(
   { path: 'reviews' }
 );
 
-exports.createUser = factory.createOne(User);
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
