@@ -9,6 +9,10 @@ const productSchema = new mongoose.Schema(
       minlength: [3, 'Product name must be at least 3 characters'],
       maxlength: [40, 'Product name must be less than 40 characters'],
     },
+    photo: {
+      type: String,
+      default: 'default-product.jpg',
+    },
     seller: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',

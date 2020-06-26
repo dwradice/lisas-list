@@ -24,11 +24,11 @@ const reviewSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Review must refer to buyer'],
     },
-    //   product: {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: 'Product',
-    //     required: [true, 'Review must link to a product'],
-    //   },
+    product: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Product',
+      required: [true, 'Review must link to a product'],
+    },
     createdAt: {
       type: Date,
       default: new Date(Date.now()).toLocaleString(),
@@ -63,10 +63,15 @@ reviewSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'seller',
     select: 'name reputation',
-  }).populate({
-    path: 'buyer',
-    select: 'name',
-  });
+  })
+    .populate({
+      path: 'buyer',
+      select: 'name',
+    })
+    .populate({
+      path: 'product',
+      select: '-seller -createdAt',
+    });
   next();
 });
 

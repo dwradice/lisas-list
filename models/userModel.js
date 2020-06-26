@@ -57,17 +57,17 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.virtual('products', {
+  ref: 'Product',
+  foreignField: 'seller',
+  localField: '_id',
+});
+
 userSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'seller',
   localField: '_id',
 });
-
-// userSchema.virtual('products', {
-//   ref: 'Product',
-//   foreignField: 'seller',
-//   localField: '_id',
-// });
 
 // userSchema.virtual('purchases', {
 //   ref: 'Purchase',
@@ -76,7 +76,7 @@ userSchema.virtual('reviews', {
 // });
 
 userSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
+  this.slug = slugify(this.email, { lower: true });
 
   next();
 });

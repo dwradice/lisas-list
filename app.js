@@ -9,6 +9,9 @@ const compression = require('compression');
 
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const productRouter = require('./routes/productRoutes');
+const AppError = require('./utils/appError.js');
+const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
 
@@ -55,5 +58,12 @@ app.use(compression());
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/products', productRouter);
+
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+});
+
+app.use(globalErrorHandler);
 
 module.exports = app;
