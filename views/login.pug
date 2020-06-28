@@ -1,0 +1,25 @@
+extends base
+
+
+block content
+    .container
+        .row
+            .col-6.mx-auto.mt-5
+                .card.card-body
+                    form.login-form
+                        .form-group
+                            label(for="email") Email address
+                            input.form-control(type="email" id="email" aria-describedby="emailHelp")
+                            small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+                        .form-group
+                            label(for="password") Password
+                            input(type="password" class="form-control" id="password")
+         
+                        .form-group.form-check
+                            input(type="checkbox" class="form-check-input" id="exampleCheck1")
+                            label.form-check-label(for="exampleCheck1") Remember Me
+   
+                        button(type="submit" class="btn btn-primary") Log in
+
+block scripts
+    script(src='/js/login.js')

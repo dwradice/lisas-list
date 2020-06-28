@@ -6,7 +6,9 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
 
+const viewRouter = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const productRouter = require('./routes/productRoutes');
@@ -40,6 +42,8 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
@@ -56,6 +60,7 @@ app.use(
 // Compression
 app.use(compression());
 
+app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/products', productRouter);

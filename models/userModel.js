@@ -37,6 +37,9 @@ const userSchema = new mongoose.Schema(
         message: 'Passwords must match',
       },
     },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
     createdAt: {
       type: Date,
       default: new Date(Date.now()).toLocaleString(),
@@ -50,6 +53,11 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: -1,
     },
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -57,6 +65,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+// Encrypt and store password on save
 userSchema.pre('save', async function (next) {
   // Only will run if password has been modified
   if (!this.isModified('password')) return next();
@@ -69,11 +78,57 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+// If password has been edited on existing user, set passwordChangedAt value
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
+// Creates slug for user on save
+userSchema.pre('save', function (next) {
+  this.slug = slugify(this.email, { lower: true });
+
+  next();
+});
+
+// Hides inactive user accounts
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: true });
+  next();
+});
+
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimetamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimetamp;
+  }
+
+  return false;
+};
+
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
 };
 
 userSchema.virtual('products', {
@@ -93,12 +148,6 @@ userSchema.virtual('reviews', {
 //   foreignField: 'buyer',
 //   localField: '_id',
 // });
-
-userSchema.pre('save', function (next) {
-  this.slug = slugify(this.email, { lower: true });
-
-  next();
-});
 
 const User = mongoose.model('User', userSchema);
 

@@ -1,0 +1,35 @@
+body {
+  background-color: #77cef034;
+  font-family: 'Raleway';
+}
+
+#user-img-btn {
+  height: 40px;
+}
+
+.my-container {
+  width: 90%;
+  margin: auto;
+}
+
+.grid-item {
+  width: 20%;
+}
+
+.filter {
+  min-height: 400px;
+}
+
+#product {
+  box-shadow: 0 10px 20px #77cef0a2, 0 6px 6px #77cef0b0;
+}
+
+#modal-img {
+  max-height: 700px;
+}
+
+@media (max-width: 768px) {
+  .grid-item {
+    width: 50%;
+  }
+}

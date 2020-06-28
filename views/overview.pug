@@ -1,0 +1,57 @@
+extends base
+
+block content
+    //- nav#filter-nav.navbar.navbar-expand-md.bg-primary
+    //-     .container-xl
+    //-         button.mr-auto.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation")
+    //-             span.navbar-toggler-icon
+
+    //-         .collapse.navbar-collapse#navbarNavAltMarkup
+    //-             .navbar-nav.mx-auto
+    //-                 a.nav-item.nav-link(href="/?category=Art") Art
+    //-                 a.nav-item.nav-link(href="/?category=Auto") Auto
+    //-                 a.nav-item.nav-link(href="/?category=Home") Home
+    //-                 a.nav-item.nav-link(href="/?category=Clothing") Clothing
+    .my-container
+        .row
+            .col-sm-3
+                .card.card-body.mt-3.sticky-top
+                    .card-title Categories
+                    a.nav-item.nav-link(href="/?category=Art") Art
+                    a.nav-item.nav-link(href="/?category=Auto") Auto
+                    a.nav-item.nav-link(href="/?category=Home") Home
+                    a.nav-item.nav-link(href="/?category=Clothing") Clothing
+                    .card-title Sort
+                    a.nav-item.nav-link(href="/?sort=price") Price: Low
+                    a.nav-item.nav-link(href="/?sort=-price") Price: High
+                    a.nav-item.nav-link(href="/?sort=-createdAt") Newest
+                    a.nav-item.nav-link(href="/?sort=createdAt") Oldest
+
+
+            .col-sm-9.mx-auto.mt-3
+                .grid(data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-item" }')
+                    each product in products
+                        -const index = products.indexOf(product);
+                        .grid-item
+                            a(data-toggle="modal" data-target=`#product${index}modal`)
+                                #product.card.my-2.mx-2
+                                    img.card-img-top(src=`/img/products/${product.photo}`)
+                                    .card-body
+                                        .card-title=product.name
+                                        .card-subtitle=`$${product.price}.00`
+
+
+                        .modal.fade(id=`product${index}modal`)
+                            .modal-dialog.modal-dialog-centered.modal-lg
+                                .modal-content 
+                                    .modal-body.text-center.p-0
+                                        button.close(data-dismiss="modal" style="font-size: 3rem") &times;
+                                        img#modal-img(src=`/img/products/${product.photo}`)
+                                        .row
+                                        .col.mt-2.mb-2.modal-product-details.text-left
+                                            h2.modal-title=products[index].name
+                                            br
+                                            h4.breed=product.price
+
+                                        
+                                        p.contact-btn.mt-3 Click here for contact information.

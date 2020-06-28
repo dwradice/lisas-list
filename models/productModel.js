@@ -44,6 +44,9 @@ const productSchema = new mongoose.Schema(
   }
 );
 
+productSchema.index({ price: 1 });
+productSchema.index({ category: 1 });
+
 productSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
 
