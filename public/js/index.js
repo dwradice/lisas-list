@@ -46,8 +46,6 @@ if (userData) {
     form.append('email', document.getElementById('update-email').value);
     form.append('photo', document.getElementById('user-photo-upload').files[0]);
 
-    console.log(form);
-
     updateSettings(form, 'data');
   });
 }
@@ -67,11 +65,14 @@ if (userPassword) {
 if (listProduct) {
   listProduct.addEventListener('submit', e => {
     e.preventDefault();
-
-    const name = document.getElementById('list-name').value;
-    const price = document.getElementById('list-price').value;
-    const category = document.getElementById('list-category').value;
-
-    postProduct(name, price, category);
+    const photo = document.getElementById('product-photo-upload').files[0];
+    const form = new FormData();
+    form.append('name', document.getElementById('list-name').value);
+    form.append('price', document.getElementById('list-price').value);
+    form.append('category', document.getElementById('list-category').value);
+    if (photo) {
+      form.append('photo', photo);
+    }
+    postProduct(form);
   });
 }

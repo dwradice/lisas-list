@@ -11,6 +11,8 @@ router
 router.post(
   '/postProduct',
   authController.protect,
+  productController.uploadProductPhoto,
+  productController.resizeProductPhoto,
   productController.myPostings,
   productController.createProduct
 );
