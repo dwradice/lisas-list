@@ -33,11 +33,18 @@ exports.getSignupForm = (req, res) => {
   });
 };
 
-exports.getMyPage = catchAsync(async (req, res) => {
+exports.getMySettings = catchAsync(async (req, res) => {
+  res.status(200).render('mySettings', {
+    title: 'My Page',
+  });
+});
+
+exports.getMyListings = catchAsync(async (req, res) => {
   const detailedUser = await User.findOne({ _id: res.locals.user.id })
     .populate('products')
     .populate('reviews');
-  res.status(200).render('myPage', {
+
+  res.status(200).render('myListings', {
     title: 'My Page',
     user: detailedUser,
   });

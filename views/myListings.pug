@@ -1,0 +1,42 @@
+extend base
+
+block content
+    .container
+        .row
+            .col-sm-3
+                ul
+                    li
+                        a(href='/me/settings') Settings
+                    li.active
+                        a My Listings
+                    li
+                        a My Purchases
+                    hr
+                    li
+                        a My Seller's page
+            .col-sm-9
+                .card-group
+                    each product in user.products
+                        .card.card-body
+                            .card-title=product.name
+                            .card-subtitle=product.createdAt
+                            .card-subtitle=product.price
+                            img(height='50px' src=`/img/products/${product.photo}`)
+                hr
+                h5 Post a new item!
+                form.list-product
+                    .form-group
+                        label(for="name") Product name
+                        input(type="name" class="form-control" id="list-name" placeholder="Accurate and Short")
+                    .form-group
+                        label(for="price") Price
+                        input.form-control(type="price" id="list-price" placeholder='$$$')
+                    .form-group
+                        label(for="category") Category
+                        input.form-control(type="category" id="list-category" placeholder="Art, Auto, Clothing, or Home")
+                    .form-group
+                        label(for="photo") Product Photo
+                        br
+                        input#photo.form-control-file(type="file")
+                    
+                    button(type="submit" class="btn btn-primary") Create New Listing

@@ -29,7 +29,7 @@ block content
 
 
             .col-sm-9.mx-auto.mt-3
-                .grid(data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-item" }')
+                .grid
                     each product in products
                         -const index = products.indexOf(product);
                         .grid-item

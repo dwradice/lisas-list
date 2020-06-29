@@ -1,0 +1,46 @@
+extend base
+
+block content
+    .container
+        .row
+            .col-sm-3
+                ul
+                    li.active
+                        a Settings
+                    li
+                        a(href='/me/listings') My Listings
+                    li
+                        a My Purchases
+                    hr
+                    li
+                        a My Seller's page
+            .col-sm-9
+                h4 Your Account Settings
+                form.user-data
+                    .form-group
+                        label(for="name") Name
+                        input(type="name" class="form-control" id="update-name" value=`${user.name}`)
+                    .form-group
+                        label(for="email") Email address
+                        input.form-control(type="email" id="update-email" aria-describedby="emailHelp" value=`${user.email}`)
+                    .form-group
+                        img#settings-user-photo.rounded-circle(src=`/img/users/${user.photo}`)
+                        br
+                        input#user-photo-upload.form-control-file(type="file" accept='image/*' name='photo')
+                        
+                    
+                    button(type="submit" class="btn btn-primary") Change User Settings
+                hr
+                h4 Your Account Settings
+                form.user-password
+                        .form-group
+                            label(for="passwordCurrent") Current Password
+                            input(type="name" class="form-control" id="passwordCurrent" placeholder='••••••••')
+                        .form-group
+                            label(for="password") New Password
+                            input(type="name" class="form-control" id="password" placeholder='••••••••')
+                        .form-group
+                            label(for="passwordConfirm") Confirm Password
+                            input(type="name" class="form-control" id="passwordConfirm" placeholder='••••••••')
+                        button(type="submit" class="btn btn-primary") Change password
+                        

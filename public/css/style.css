@@ -3,6 +3,26 @@ body {
   font-family: 'Raleway';
 }
 
+.alert {
+  position: fixed;
+  top: 0;
+  left: 30%;
+  color: #fff;
+  font-size: 1.8rem;
+  text-align: center;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  z-index: 9999;
+}
+
+.alert-success {
+  background-color: #20bf6b;
+}
+
+.alert-error {
+  background-color: #eb4d4b;
+}
+
 #user-img-btn {
   height: 40px;
 }
@@ -26,6 +46,10 @@ body {
 
 #modal-img {
   max-height: 700px;
+}
+
+#settings-user-photo {
+  height: 150px;
 }
 
 @media (max-width: 768px) {

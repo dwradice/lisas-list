@@ -5,11 +5,12 @@ nav(id="main-nav" class="navbar bg-primary")
         ul.nav.text-white.align-items-center
             if user
                 li.nav-item
-                    a.nav-link.text-white(href='/me')
+                    a.nav-link.text-white(href='/me/settings')
                         img#user-img-btn.rounded-circle(src=`/img/users/${user.photo}`)
+                        p=user.name
                 | /
                 li.nav-item
-                    a.nav-link.text-white(href='/login') Log Out
+                    a.nav-link.text-white.nav-link-logout Log Out
 
             else 
                 li.nav-item

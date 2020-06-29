@@ -74,9 +74,9 @@ const sendErrorProd = (err, req, res) => {
   // Programming or other unknown error
   console.error('ERROR ✔', err);
 
-  return res.status(500).json({
-    status: 'error',
-    msg: 'please try again later',
+  return res.status(err.statusCode).render({
+    title: 'Something went wrong',
+    msg: 'Please try again later',
   });
 };
 
