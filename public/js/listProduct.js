@@ -5,7 +5,7 @@ export const postProduct = async data => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:1032/api/v1/products/postProduct',
+      url: '/api/v1/products/postProduct',
       data,
     });
 
