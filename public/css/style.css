@@ -10,11 +10,15 @@ body {
 }
 
 /* UTILITY */
-
-.container-xxl {
+ {
   max-width: 1504px;
-  padding-left: 30px;
-  padding-right: 30px;
+}
+
+.container-xxl,
+.wrapper {
+  max-width: 1504px;
+  padding-left: 45px;
+  padding-right: 45px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -53,6 +57,19 @@ body {
   width: 60px;
 }
 
+#main-nav {
+  background-image: linear-gradient(to bottom right, #153dac, #77cef0);
+}
+
+#main-nav .menu-item {
+  color: #153dac;
+  font-size: 1.25rem;
+}
+
+#main-nav .menu-item:hover {
+  color: #fff;
+}
+
 /* LOGIN & SIGNUP PAGES */
 
 #login .card,
@@ -80,8 +97,29 @@ body {
 
 /* OVERVIEW PAGE */
 
-/* FILTER BAR */
+.banner {
+  position: relative;
+  font-family: 'Raleway';
+  color: #153dac9f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #77cef065;
+  margin-top: 10px;
+  border-radius: 10px;
+  max-height: 50px;
+  box-shadow: 0 1px 2px #00000025, 0 4px 4px #00000013;
+}
 
+.banner h5 {
+  font-size: 1.5rem;
+}
+
+#banner-img {
+  max-height: 90px;
+}
+
+/* FILTER BAR */
 .panel {
   color: #153dac !important;
 }
@@ -104,7 +142,7 @@ body {
   color: #153dac;
   font-family: 'Raleway';
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
 }
 #accordion .panel-heading a.collapsed:hover,
 #accordion .panel-heading a.collapsed:focus {
@@ -168,7 +206,7 @@ body {
 #product:hover {
   z-index: 9999;
   /* background-color: #77cef0; */
-  transform: scale(1.25) perspective(10px);
+  transform: scale(1.2);
 }
 
 #product .card-price {
@@ -199,12 +237,12 @@ body {
 
 /* MEDIA QUERIES */
 
-@media (max-width: 1170px) {
+@media (max-width: 1200px) {
   .grid-item {
     width: 33.33%;
   }
-  #accordian a {
-    font-size: 1rem;
+  #accordian .nav-link {
+    font-size: 0.5rem;
   }
 }
 

@@ -1,11 +1,13 @@
 extends base
 
 block content
-    -console.log(query)
-    .container-xxl.px-3.mx-auto
-        .row
+    .container-xxl.mx-auto
+        .banner
+            img#banner-img.mr-5(src='/img/banner-img.png')
+            h5.pt-2.d-inline Shop, Sell, and Review On The World's #1 Virtual Marketplace
+        .row 
             #filter.col-md-3.col-lg-2
-                #accordion.panel-group.mt-4
+                #accordion.panel-group.mt-4.sticky-top
                     .panel
                         .panel-heading
                             .panel-title
@@ -13,8 +15,9 @@ block content
                         #panelBodyOne.panel-collapse.collapse.panel-body
                             a.nav-item.nav-link(href="/?category=Art") Art
                             a.nav-item.nav-link(href="/?category=Auto") Auto
-                            a.nav-item.nav-link(href="/?category=Home") Home
-                            a.pb-3.nav-item.nav-link(href="/?category=Clothing") Clothing
+                            a.nav-item.nav-link(href="/?category=Clothing") Clothing
+                            a.nav-item.nav-link(href="/?category=Electronics") Electronics
+                            a.pb-3.nav-item.nav-link(href="/?category=Home") Home
                     .panel
                         .panel-heading
                             .panel-title
@@ -39,7 +42,6 @@ block content
             .col-md-9.col-lg-10.mx-auto.mt-3
                 .grid
                     each product in products
-                        
                         #product.grid-item
                             a(href=`/products/:${product.id}`)
                                 .card.my-2.mx-2
