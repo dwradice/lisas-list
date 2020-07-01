@@ -1,21 +1,27 @@
-nav(id="main-nav" class="navbar bg-primary")
+nav#main-nav.navbar.navbar-expand-md.navbar-dark.bg-primary
     .container-xl
-        a.logo-link(href="/")
-            img#logo(src="/img/long-logo.png" style="height: 50px")
-        ul.nav.text-white.align-items-center
-            if user
-                li.nav-item
-                    a.nav-link.text-white(href='/me/settings')
-                        img#user-img-btn.rounded-circle(src=`/img/users/${user.photo}`)
-                        p=user.name
-                | /
-                li.nav-item
-                    a.nav-link.text-white.nav-link-logout Log Out
-
-            else 
-                li.nav-item
-                    a.nav-link.text-white(href='/signup') Sign up
-                | /
-                li.nav-item
-                    a.nav-link.text-white(href='/login') Log in
-
+        .d-flex.flex-grow-1
+            span.w-100.d-md-none.d-block
+            a.navbar-brand.d-none.d-md-inline-block(href="/")
+                img#logo(src="/img/long-logo.png" alt="logo")
+            a.navbar-brand-two.mx-auto.d-md-none.d-inline-block(href="#")
+                img#logo(src="/img/long-logo.png" alt="logo")
+            .w-100.text-right
+                button.navbar-toggler(type="button" data-toggle="collapse" data-target="#myNavbar")
+                    span.navbar-toggler-icon
+        #myNavbar.collapse.navbar-collapse.flex-grow-1.text-right 
+            ul.navbar-nav.ml-auto.flex-nowrap
+                if user
+                    img#header-user-img.rounded-circle.d-none.d-lg-block(src=`/img/users/${user.photo}`)
+                    li.nav-item
+                        a(href="/me/settings" class="nav-link m-2 menu-item") My Settings
+                    li.nav-item
+                        a(href="/me/listings" class="nav-link m-2 menu-item") My Listings
+                    li.nav-item
+                        a.nav-link-logout(href="#" class="nav-link m-2 menu-item") Log out
+                    
+                else
+                    li.nav-item
+                        a(href="/login" class="nav-link m-2 menu-item") Log In
+                    li.nav-item
+                        a(href="/signup" class="nav-link m-2 menu-item") Sign Up

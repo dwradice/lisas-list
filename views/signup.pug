@@ -2,10 +2,11 @@ extends base
 
 
 block content
-    .container
+    #signup.container
         .row
-            .col-6.mx-auto.mt-5
+            .col.mx-auto.mt-5
                 .card.card-body
+                    h3.mt-5.pb-3 Join Now!
                     form.signup-form
                         .form-group
                             label(for='name') Name
@@ -16,15 +17,16 @@ block content
                             small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
                         .form-group
                             label(for="password") Password
-                            input(type="password" class="form-control" id="password")
+                            input(type="password" class="form-control" id="password" minlength="8")
+                            small.form-text.text-muted Password must be at least 8 characters long
                         .form-group
                             label(for="password") Confirm Password
-                            input(type="password" class="form-control" id="passwordConfirm")
+                            input(type="password" class="form-control" id="passwordConfirm" minlength="8")
          
                         .form-group.form-check
                             input(type="checkbox" class="form-check-input" id="exampleCheck1")
                             label.form-check-label(for="exampleCheck1") I agree to 
                             a(href='#') Terms and Services
    
-                        button(type="submit" class="btn btn-primary") Sign Up
+                        button.mb-5(type="submit" class="btn btn-primary btn-block") Sign Up
             

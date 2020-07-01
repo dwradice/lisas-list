@@ -4,6 +4,7 @@ import { login, logout } from './login';
 import { signup } from './signup';
 import { updateSettings } from './updateSettings';
 import { postProduct } from './listProduct';
+import { updateProduct } from './editProduct';
 import './masonry';
 
 // DOM ELEMENTS
@@ -13,6 +14,7 @@ const logOutBtn = document.querySelector('.nav-link-logout');
 const userData = document.querySelector('.user-data');
 const userPassword = document.querySelector('.user-password');
 const listProduct = document.querySelector('.list-product');
+const editProduct = document.querySelector('.edit-product');
 
 if (logOutBtn) {
   logOutBtn.addEventListener('click', logout);
@@ -76,3 +78,30 @@ if (listProduct) {
     postProduct(form);
   });
 }
+
+if (editProduct) {
+  editProduct.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const id = editProduct.dataset.id;
+
+    const photo = document.getElementById('edit-product-photo-upload').files[0];
+
+    const form = new FormData();
+    form.append('name', document.getElementById('edit-name').value);
+    form.append('price', document.getElementById('edit-price').value);
+    form.append('category', document.getElementById('edit-category').value);
+    if (photo) {
+      form.append('photo', photo);
+    }
+    updateProduct(form, id);
+  });
+}
+
+// if (editProduct) {
+//   editProduct.addEventListener('button', e => {
+//     e.preventDefault()
+
+//     const
+//   })
+// }

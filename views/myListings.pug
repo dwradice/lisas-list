@@ -15,13 +15,44 @@ block content
                     li
                         a My Seller's page
             .col-sm-9
-                .card-group
+                .row
                     each product in user.products
-                        .card.card-body
-                            .card-title=product.name
-                            .card-subtitle=product.createdAt
-                            .card-subtitle=product.price
-                            img(height='50px' src=`/img/products/${product.photo}`)
+                        .col-md-4
+                            -const index = user.products.indexOf(product);
+                            a(data-toggle="modal" data-target=`#product${index}modal`)
+                                .card.card-body
+                                    .card-title=product.name
+                                    
+                                    .card-subtitle=product.price
+                                    img#my-product-card-img( src=`/img/products/${product.photo}`)
+
+                        .modal.fade(id=`product${index}modal`)
+                            .modal-dialog.modal-dialog-centered.modal-lg
+                                .modal-content 
+                                    .modal-body.text-center.p-0
+                                        form.edit-product(data-id=product.id)
+                                            .form-group
+                                                label(for="name") Product name
+                                                input(type="name" class="form-control" id="edit-name" value=product.name)
+                                            .form-group
+                                                label(for="price") Price
+                                                input.form-control(type="price" id="edit-price" value=product.price)
+                                            .form-group
+                                                label(for="category") Category
+                                                select.form-control(type="category" id="edit-category")
+                                                    option(value='Art') Art
+                                                    option(value='Auto') Auto
+                                                    option(value='Clothing') Clothing
+                                                    option(value='Home') Home
+                                            .form-group
+                                                label(for="photo") Product Photo
+                                                br
+                                                input.form-control-file(type="file" id="edit-product-photo-upload" accept='image/*')
+                                            
+                                            button(type='submit' class="btn btn-primary") Update Listing
+                                            //- button(type="delete" class="btn btn-danger") Delete Listing
+                                        
+
                 hr
                 h5 Post a new item!
                 form.list-product
@@ -30,10 +61,14 @@ block content
                         input(type="name" class="form-control" id="list-name" placeholder="Accurate and Short")
                     .form-group
                         label(for="price") Price
-                        input.form-control(type="price" id="list-price" placeholder='$$$')
+                        input.form-control(type="number" id="list-price" placeholder='$$$')
                     .form-group
                         label(for="category") Category
-                        input.form-control(type="category" id="list-category" placeholder="Art, Auto, Clothing, or Home")
+                        select.form-control(type="category" id="list-category")
+                            option(value='Art') Art
+                            option(value='Auto') Auto
+                            option(value='Clothing') Clothing
+                            option(value='Home') Home
                     .form-group
                         label(for="photo") Product Photo
                         br
