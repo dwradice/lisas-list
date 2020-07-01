@@ -24,7 +24,7 @@ body {
 }
 
 .alert {
-  position: absolute;
+  position: fixed;
   left: 50%;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -221,18 +221,131 @@ body {
 /* MY SETTINGS */
 #settings-user-photo {
   height: 150px;
+  width: 150px;
+}
+#settings-product-photo {
+  height: 150px;
+}
+
+.me-links {
+  background-image: linear-gradient(to bottom right, #153dace8, #77cef0);
+  border-radius: 10px;
+  margin-top: 10px;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.me-links .active a {
+  border: #fff 2px solid;
+  border-radius: 5px;
+}
+
+.me-links hr {
+  background-color: #fff;
+}
+
+.me-links a {
+  color: #fff;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.me-links a:hover {
+  transition: all 0.25s ease-out;
+  transform: translate(10px);
+  border-left: #fff 2px solid;
+}
+
+.me-settings,
+.me-listings,
+.me-listings-edit {
+  font-family: 'Raleway';
+  color: #4a4a4a;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-top: 10px;
+}
+
+.me-settings h4,
+.me-listings h4,
+.me-listings-edit h4 {
+  color: #153dac;
+  font-size: 2rem;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 30px;
+}
+
+.me-settings form,
+.me-listings form,
+.me-listings-edit form {
+  width: 75%;
+  margin: auto;
+}
+
+.file-upload {
+  display: flex;
+  justify-content: center;
+}
+
+.move-button h6 {
+  font-size: 0.9rem;
+}
+
+.move-button {
+  margin-bottom: 20px;
 }
 
 /* MY LISTINGS */
 
-#my-product-card-img {
-  max-height: 300px;
-  height: 100%;
-  width: 100%;
+.me-listings .card-img {
+  height: 50%;
+}
+
+.me-listings .card-footer {
+  background-color: #fff;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.me-listings-edit .card-footer {
+  background-color: transparent;
+  border: none;
+}
+
+.me-listings-edit .update-product-btn {
+  color: #153dac;
+}
+
+.me-listings-edit .update-product-btn:hover {
+  color: #fff;
+}
+
+.me-listings-edit .delete-product-btn {
+  color: #dc3545;
+}
+
+.me-listings-edit .delete-product-btn:hover {
+  color: #fff;
 }
 
 #modal-img {
   max-height: 700px;
+}
+
+.me-listings .card {
+  max-height: 450px;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+/* FOOTER */
+#footer {
+  min-height: 80px;
+  border-top: #153dac 3px solid;
+  color: #153dac;
+  margin-top: 10px;
+  background-color: #77cef080;
 }
 
 /* MEDIA QUERIES */

@@ -4,7 +4,7 @@ import { login, logout } from './login';
 import { signup } from './signup';
 import { updateSettings } from './updateSettings';
 import { postProduct } from './listProduct';
-import { updateProduct } from './editProduct';
+import { updateProduct, deleteProduct } from './editProduct';
 import './masonry';
 
 // DOM ELEMENTS
@@ -14,7 +14,8 @@ const logOutBtn = document.querySelector('.nav-link-logout');
 const userData = document.querySelector('.user-data');
 const userPassword = document.querySelector('.user-password');
 const listProduct = document.querySelector('.list-product');
-const editProduct = document.querySelector('.edit-product');
+const deleteProductBtn = document.querySelector('.delete-product-btn');
+const updateProductBtn = document.querySelector('.update-product-btn');
 
 if (logOutBtn) {
   logOutBtn.addEventListener('click', logout);
@@ -79,12 +80,11 @@ if (listProduct) {
   });
 }
 
-if (editProduct) {
-  editProduct.addEventListener('submit', e => {
+if (updateProductBtn) {
+  updateProductBtn.addEventListener('click', e => {
     e.preventDefault();
 
-    const id = editProduct.dataset.id;
-
+    const id = updateProductBtn.dataset.id;
     const photo = document.getElementById('edit-product-photo-upload').files[0];
 
     const form = new FormData();
@@ -94,14 +94,17 @@ if (editProduct) {
     if (photo) {
       form.append('photo', photo);
     }
+
     updateProduct(form, id);
   });
 }
 
-// if (editProduct) {
-//   editProduct.addEventListener('button', e => {
-//     e.preventDefault()
+if (deleteProductBtn) {
+  deleteProductBtn.addEventListener('click', e => {
+    e.preventDefault();
 
-//     const
-//   })
-// }
+    const id = deleteProductBtn.dataset.id;
+
+    deleteProduct(id);
+  });
+}

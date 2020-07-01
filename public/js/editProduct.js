@@ -12,7 +12,7 @@ export const updateProduct = async (data, id) => {
     if (res.data.status === 'success') {
       showAlert('success', 'Product updated successfully!');
       window.setTimeout(() => {
-        location.reload(true);
+        location.assign('/me/listings');
       }, 1500);
     }
   } catch (err) {
@@ -23,15 +23,18 @@ export const updateProduct = async (data, id) => {
 export const deleteProduct = async id => {
   try {
     const url = `/api/v1/products/${id}`;
+
     const res = await axios({
-      method: 'PATCH',
+      method: 'DELETE',
       url,
-      data,
     });
-    if (res.data.status === 'success') {
-      showAlert('success', 'Product updated successfully!');
+
+    console.log(res.status);
+
+    if (res.status === 204) {
+      showAlert('success', 'Product deleted successfully!');
       window.setTimeout(() => {
-        location.reload(true);
+        location.assign('/me/listings');
       }, 1500);
     }
   } catch (err) {

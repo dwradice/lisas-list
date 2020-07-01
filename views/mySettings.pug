@@ -1,37 +1,37 @@
 extend base
 
 block content
-    .container
+    .container-xxl
         .row
-            .col-sm-3
-                ul
-                    li.active
-                        a Settings
-                    li
-                        a(href='/me/listings') My Listings
-                    li
-                        a My Purchases
+            .col-sm-3.me-links
+                ul.nav.flex-column
+                    li.nav-item.active
+                        a.nav-link(href='/me/settings') My Settings
+                    li.nav-item
+                        a.nav-link(href='/me/listings') My Listings
+                    li.nav-item
+                        a.nav-link My Purchases
                     hr
-                    li
-                        a My Seller's page
-            .col-sm-9
-                h4 Your Account Settings
+                    li.nav-item
+                        a.nav-link My Seller's page
+            .col-sm-9.me-settings
+                h4.mt-3 Your Account Settings
                 form.user-data
                     .form-group
                         label(for="name") Name
-                        input(type="name" class="form-control" id="update-name" value=`${user.name}`)
+                        input.form-control(type="name" id="update-name" value=`${user.name}`)
                     .form-group
                         label(for="email") Email address
                         input.form-control(type="email" id="update-email" aria-describedby="emailHelp" value=`${user.email}`)
-                    .form-group
-                        img#settings-user-photo.rounded-circle(src=`/img/users/${user.photo}`)
-                        br
-                        input#user-photo-upload.form-control-file(type="file" accept='image/*')
-                        
-                    
-                    button(type="submit" class="btn btn-primary") Change User Settings
+                    .form-group.file-upload
+                        img#settings-user-photo.rounded-circle.mr-3.mt-3(src=`/img/users/${user.photo}`)
+                        input#user-photo-upload.form-control-file.align-self-center.w-25.ml-3(type="file" accept='image/*' onchange="document.getElementById('settings-user-photo').src = window.URL.createObjectURL(this.files[0])")
+                
+                    .move-button.text-center
+                        h6.text-muted.mb-5 Photo will be automatically cropped on upload
+                        button(type="submit" class="btn btn-primary w-50") Update User Settings
                 hr
-                h4 Your Account Settings
+                h4.mt-3 Your Password Settings
                 form.user-password
                         .form-group
                             label(for="passwordCurrent") Current Password
@@ -42,5 +42,6 @@ block content
                         .form-group
                             label(for="passwordConfirm") Confirm Password
                             input(type="name" class="form-control" id="passwordConfirm" placeholder='••••••••')
-                        button(type="submit" class="btn btn-primary") Change password
+                        .move-button.text-center
+                            button(type="submit" class="btn btn-primary w-50 mt-3") Change password
                         

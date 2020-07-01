@@ -1,64 +1,42 @@
 extend base
 
 block content
-    .container
+    .container-xxl
         .row
-            .col-sm-3
-                ul
-                    li
-                        a(href='/me/settings') Settings
-                    li.active
-                        a My Listings
-                    li
-                        a My Purchases
+            .col-sm-3.me-links
+                ul.nav.flex-column
+                    li.nav-item
+                        a.nav-link(href='/me/settings') My Settings
+                         
+                    li.nav-item.active
+                        a.nav-link(href='/me/listings') My Listings
+                    li.nav-item
+                        a.nav-link My Purchases
                     hr
-                    li
-                        a My Seller's page
-            .col-sm-9
+                    li.nav-item
+                        a.nav-link My Seller's page
+            .col-sm-9.me-listings
+                h4.mt-3 My Current Listings
                 .row
                     each product in user.products
                         .col-md-4
-                            -const index = user.products.indexOf(product);
-                            a(data-toggle="modal" data-target=`#product${index}modal`)
-                                .card.card-body
-                                    .card-title=product.name
-                                    
-                                    .card-subtitle=product.price
-                                    img#my-product-card-img( src=`/img/products/${product.photo}`)
+                            .card
+                                img.card-img( src=`/img/products/${product.photo}`)
+                                .card-body
+                                    -const date = `${product.createdAt}`.split(' GMT')[0]
 
-                        .modal.fade(id=`product${index}modal`)
-                            .modal-dialog.modal-dialog-centered.modal-lg
-                                .modal-content 
-                                    .modal-body.text-center.p-0
-                                        form.edit-product(data-id=product.id)
-                                            .form-group
-                                                label(for="name") Product name
-                                                input(type="name" class="form-control" id="edit-name" value=product.name)
-                                            .form-group
-                                                label(for="price") Price
-                                                input.form-control(type="price" id="edit-price" value=product.price)
-                                            .form-group
-                                                label(for="category") Category
-                                                select.form-control(type="category" id="edit-category")
-                                                    option(value='Art') Art
-                                                    option(value='Auto') Auto
-                                                    option(value='Clothing') Clothing
-                                                    option(value='Home') Home
-                                            .form-group
-                                                label(for="photo") Product Photo
-                                                br
-                                                input.form-control-file(type="file" id="edit-product-photo-upload" accept='image/*')
-                                            
-                                            button(type='submit' class="btn btn-primary") Update Listing
-                                            //- button(type="delete" class="btn btn-danger") Delete Listing
-                                        
-
+                                    .card-title=`Name: ${product.name}`
+                                    .card-title=`Category: ${product.category}`
+                                    .card-title=`Price: $${product.price}`
+                                    .card-title=`Date Posted: ${date}`
+                                .card-footer.text-center.mt-3 
+                                    a.btn.btn-outline-danger.ml-2(href=`/me/listings/${product.id}`) Edit / Delete
                 hr
-                h5 Post a new item!
+                h4 Post a new item!
                 form.list-product
                     .form-group
                         label(for="name") Product name
-                        input(type="name" class="form-control" id="list-name" placeholder="Accurate and Short")
+                        input(type="name" class="form-control" id="list-name" placeholder="Specific & Succinct")
                     .form-group
                         label(for="price") Price
                         input.form-control(type="number" id="list-price" placeholder='$$$')
@@ -68,10 +46,11 @@ block content
                             option(value='Art') Art
                             option(value='Auto') Auto
                             option(value='Clothing') Clothing
+                            option(value='Electronics') Electronics
                             option(value='Home') Home
-                    .form-group
-                        label(for="photo") Product Photo
-                        br
-                        input.form-control-file(type="file" id="product-photo-upload" accept='image/*')
+                    .form-group.file-upload
+                        img#settings-product-photo.mr-3.my-3(src=`/img/products/default-product.jpg`)
+                        input#product-photo-upload.form-control-file.align-self-center.w-25.ml-3(type="file" accept='image/*' onchange="document.getElementById('settings-product-photo').src = window.URL.createObjectURL(this.files[0])")
                     
-                    button(type="submit" class="btn btn-primary") Create New Listing
+                    .move-button.text-center
+                        button(type="submit" class="btn btn-primary w-50") Create New Listing

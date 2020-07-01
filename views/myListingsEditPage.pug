@@ -1,0 +1,43 @@
+extend base
+
+block content
+    .container-xxl
+        .row
+            .col-sm-3.me-links
+                ul.nav.flex-column
+                    li.nav-item
+                        a.nav-link(href='/me/settings') My Settings
+                         
+                    li.nav-item.active
+                        a.nav-link(href='/me/listings') My Listings
+                    li.nav-item
+                        a.nav-link My Purchases
+                    hr
+                    li.nav-item
+                        a.nav-link My Seller's page
+            .col-sm-9.me-listings-edit
+                if product
+                    h4.mt-3 Edit your product
+                    form
+                        .form-group
+                            label(for="name") Product name
+                            input(type="name" class="form-control" id="edit-name" value=product.name)
+                        .form-group
+                            label(for="price") Price
+                            input.form-control(type="number" id="edit-price" value=product.price)
+                        .form-group
+                            label(for="category") Category
+                            select.form-control(type="category" id="edit-category")
+                                option(value='Art') Art
+                                option(value='Auto') Auto
+                                option(value='Clothing') Clothing
+                                option(value='Electronics') Electronics
+                                option(value='Home') Home
+                        .form-group.file-upload
+                            img#settings-product-photo.mr-3.my-3(src=`/img/products/${product.photo}`)
+                            input#edit-product-photo-upload.form-control-file.align-self-center.w-25.ml-3(type="file" accept='image/*' onchange="document.getElementById('settings-product-photo').src = window.URL.createObjectURL(this.files[0])")
+                        .card-footer.text-center.mt-3
+                            a.update-product-btn.btn.btn-outline-primary.mr-2(type="submit" data-id=product.id) Update
+                            a.delete-product-btn.btn.btn-outline-danger.ml-2(data-id=product.id) Delete
+                else
+                    h4 That Product Doesnt Exist

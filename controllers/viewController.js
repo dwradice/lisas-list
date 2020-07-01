@@ -46,7 +46,16 @@ exports.getMyListings = catchAsync(async (req, res) => {
     .populate('reviews');
 
   res.status(200).render('myListings', {
-    title: 'My Page',
+    title: 'My Listings',
     user: detailedUser,
+  });
+});
+
+exports.getMyListingsEditPage = catchAsync(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  res.status(200).render('myListingsEditPage', {
+    title: 'Edit My Product',
+    product,
   });
 });

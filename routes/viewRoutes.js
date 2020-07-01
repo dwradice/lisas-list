@@ -25,6 +25,12 @@ router.get(
   viewController.getMyListings
 );
 
+router.get(
+  '/me/listings/:id',
+  authController.protect,
+  viewController.getMyListingsEditPage
+);
+
 router.get('/login', viewController.getLoginForm);
 router.get('/signup', viewController.getSignupForm);
 
