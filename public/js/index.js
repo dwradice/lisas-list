@@ -3,8 +3,7 @@ import 'bootstrap';
 import { login, logout } from './login';
 import { signup } from './signup';
 import { updateSettings } from './updateSettings';
-import { postProduct } from './listProduct';
-import { updateProduct, deleteProduct } from './editProduct';
+import { updateProduct, deleteProduct, postProduct  } from './editProduct';
 import './masonry';
 
 // DOM ELEMENTS

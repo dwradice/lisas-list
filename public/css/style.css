@@ -35,7 +35,7 @@ body {
   text-align: center;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  z-index: 9999;
+  z-index: 6666;
 }
 
 .alert-success {
@@ -204,7 +204,7 @@ body {
 }
 
 #product:hover {
-  z-index: 9999;
+  z-index: 6666;
   /* background-color: #77cef0; */
   transform: scale(1.2);
 }
@@ -329,14 +329,80 @@ body {
   color: #fff;
 }
 
-#modal-img {
-  max-height: 700px;
-}
-
 .me-listings .card {
   max-height: 450px;
   height: 100%;
   margin-bottom: 20px;
+}
+
+/* PRODUCT MODAl */
+
+.modal {
+  z-index: 9999;
+  font-family: 'Raleway';
+}
+
+.modal-content {
+  position: relative;
+}
+
+.modal-body {
+  min-height: 600px;
+  background-image: linear-gradient(to bottom right, #153dace8, #77cef0);
+  padding: 0;
+  margin: 0;
+}
+
+#modal-img {
+  max-width: 100%;
+  border: #77cef0 5px solid;
+}
+
+.modal .purchase-btn {
+  position: absolute;
+  top: 90%;
+  left: 29%;
+  background-color: #c286f3;
+  color: white;
+  display: inline-block;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+
+.modal .purchase-btn:hover {
+  color: #2e0152;
+}
+
+.modal .modal-title {
+  font-size: 2rem;
+  color: #153dac;
+}
+
+.modal .seller-details img {
+  max-height: 200px;
+}
+
+.modal .seller-details {
+}
+
+.modal .close {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #153dac;
+}
+
+.modal .photo-side {
+  background-color: #000;
+}
+
+.reputation-star-active {
+  color: #153dac;
+  display: block;
+}
+
+.reputation-star-inactive {
+  display: none;
 }
 
 /* FOOTER */
