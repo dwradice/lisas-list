@@ -73,7 +73,9 @@ body {
 /* LOGIN & SIGNUP PAGES */
 
 #login .card,
-#signup .card {
+#signup .card,
+#forgot-password .card,
+#reset-password .card {
   box-shadow: 0 10px 20px #77cef0a2, 0 6px 6px #77cef0b0;
   margin: auto;
   min-height: 500px;
@@ -85,14 +87,27 @@ body {
 }
 
 #login h3,
-#signup h3 {
+#signup h3,
+#forgot-password h3,
+#reset-password h3 {
   font-size: 2rem;
   color: #153dac;
 }
 
 #login .login-form,
-#signup .signup-form {
+#signup .signup-form,
+#forgot-password .forgot-password-form,
+#reset-password .reset-password-form {
   width: 80%;
+}
+
+#login .login-form a {
+  text-decoration: none;
+  color: #777;
+}
+
+#login .login-form a:hover {
+  color: #333;
 }
 
 /* OVERVIEW PAGE */
@@ -194,8 +209,7 @@ body {
 }
 
 #product a {
-  text-decoration: none;
-  color: #4a4a4a;
+  cursor: pointer;
 }
 
 #product {

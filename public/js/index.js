@@ -3,7 +3,8 @@ import 'bootstrap';
 import { login, logout } from './login';
 import { signup } from './signup';
 import { updateSettings } from './updateSettings';
-import { updateProduct, deleteProduct, postProduct  } from './editProduct';
+import { updateProduct, deleteProduct, postProduct } from './editProduct';
+import { forgetPassword, resetPassword } from './resetPassword';
 import './masonry';
 
 // DOM ELEMENTS
@@ -15,6 +16,8 @@ const userPassword = document.querySelector('.user-password');
 const listProduct = document.querySelector('.list-product');
 const deleteProductBtn = document.querySelector('.delete-product-btn');
 const updateProductBtn = document.querySelector('.update-product-btn');
+const forgetPasswordForm = document.querySelector('.forgot-password-form');
+const resetPasswordForm = document.querySelector('.reset-password-form');
 
 if (logOutBtn) {
   logOutBtn.addEventListener('click', logout);
@@ -105,5 +108,30 @@ if (deleteProductBtn) {
     const id = deleteProductBtn.dataset.id;
 
     deleteProduct(id);
+  });
+}
+
+if (forgetPasswordForm) {
+  forgetPasswordForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const email = document.getElementById('forgot-password-email').value;
+
+    forgetPassword(email);
+  });
+}
+
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const token = window.location.pathname.split('/reset-password/')[1];
+
+    const password = document.getElementById('reset-forgot-password').value;
+    const passwordConfirm = document.getElementById(
+      'reset-forgot-password-confirm'
+    ).value;
+
+    resetPassword(password, passwordConfirm, token);
   });
 }

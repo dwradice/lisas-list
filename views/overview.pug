@@ -59,7 +59,7 @@ block content
                                 .modal-content
                                     .modal-body
                                         .row
-                                            .col-md-6.my-auto
+                                            .col-md-6.my-auto.text-center
                                                 img#modal-img.m-3(src=`/img/products/${product.photo}`)
                                             .col-md-6.text-center.h-100.text-white
                                                 .product-details
@@ -69,7 +69,7 @@ block content
                                                 .seller-details.text-center
                                                     h4.pb-3.mt-3 Posted by...
                                                     img.rounded-circle.pb-3(src=`/img/users/${product.seller.photo}`)
-                                                    h6.pb-2=product.seller.name
+                                                    h5.pb-2=product.seller.name
                                                     .seller-reputation.pb-3
                                                         if product.seller.reputation !== -1
                                                             each star in [1,2,3,4,5]
@@ -77,31 +77,5 @@ block content
                                                         else
                                                             h6  This seller has no reviews yet
                                                     button#purchase-btn.btn.btn-outline-primary.mx-3 Buy Now
-
-
-
-
-
-                                    //- .modal-header.d-flex.align-items-center
-                                    //-     .modal-title=product.name
-                                    //-     button.close(data-dismiss="modal" style="font-size: 3rem") &times; 
-                                    
-                                        
-                                    //-     .row
-                                    //-         .col-sm-6
-                                    //-             .product-details
-                                    //-                 .modal-subtitle=formattedPrice
-                                    //-         .col-sm-6
-                                    //-             .seller-details
-                                    //-                 .card.card-body 
-                                    //-                     img.card-img-top.rounded-circle(src=`/img/users/${product.seller.photo}`)
-                                    //-                     h6=product.seller.name
-                                    //-                     .seller-reputation.d-flex
-                                    //-                         if product.seller.reputation !== -1
-                                    //-                             each star in [1,2,3,4,5]
-                                    //-                                 i.fas.fa-star(class=`reputation-star-${product.seller.reputation >= star ? 'active' : 'inactive'}`)
-                                    //-                         else
-                                    //-                             h6 This seller has no reviews yet
-
 
 

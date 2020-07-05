@@ -34,5 +34,7 @@ router.get(
 
 router.get('/login', viewController.getLoginForm);
 router.get('/signup', viewController.getSignupForm);
+router.get('/forgot-password', viewController.getForgotPassword);
+router.get('/reset-password/:token', viewController.getResetPassword);
 
 module.exports = router;

@@ -59,3 +59,15 @@ exports.getMyListingsEditPage = catchAsync(async (req, res) => {
     product,
   });
 });
+
+exports.getForgotPassword = (req, res) => {
+  res.status(200).render('forgotPassword', {
+    title: 'Forgot Password',
+  });
+};
+
+exports.getResetPassword = (req, res) => {
+  res.status(200).render('resetPassword', {
+    title: 'Reset Password',
+  });
+};
