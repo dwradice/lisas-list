@@ -4,10 +4,8 @@ const User = require('./../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-let stripe = require('stripe');
-
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
-  stripe = stripe(process.env.STRIPE_SECRET_KEY);
+  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
   // Get selected product
   const product = await Product.findById(req.params.productID);
 
