@@ -32,6 +32,12 @@ router.get(
   viewController.getMyListingsEditPage
 );
 
+router.get(
+  '/me/purchases',
+  authController.protect,
+  viewController.getMyPurchases
+);
+
 router.get('/login', viewController.getLoginForm);
 router.get('/signup', viewController.getSignupForm);
 router.get('/forgot-password', viewController.getForgotPassword);

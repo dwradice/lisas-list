@@ -25,12 +25,9 @@ const purchaseSchema = mongoose.Schema({
   },
 });
 
-purchaseSchema.pre(/^find/, function (next) {
-  this.populate('product').populate({
-    path: 'buyer',
-    select: 'name email photo',
-  });
-});
+// purchaseSchema.pre(/^find/, function (next) {
+//   this.populate('product');
+// });
 
 const Purchase = mongoose.model('Purchase', purchaseSchema);
 

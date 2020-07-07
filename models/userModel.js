@@ -131,21 +131,21 @@ userSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
+userSchema.virtual('purchases', {
+  ref: 'Purchase',
+  foreignField: 'buyer',
+  localField: '_id',
+});
+
 userSchema.virtual('products', {
   ref: 'Product',
   foreignField: 'seller',
   localField: '_id',
 });
 
-userSchema.virtual('reviews', {
-  ref: 'Review',
-  foreignField: 'seller',
-  localField: '_id',
-});
-
-// userSchema.virtual('purchases', {
-//   ref: 'Purchase',
-//   foreignField: 'buyer',
+// userSchema.virtual('reviews', {
+//   ref: 'Review',
+//   foreignField: 'seller',
 //   localField: '_id',
 // });
 

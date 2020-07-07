@@ -51,6 +51,22 @@ exports.getMyListings = catchAsync(async (req, res) => {
   });
 });
 
+exports.getMyPurchases = catchAsync(async (req, res) => {
+  const detailedUser = await User.findOne({ _id: res.locals.user.id }).populate(
+    {
+      path: 'purchases',
+      populate: {
+        path: 'product',
+      },
+    }
+  );
+
+  res.status(200).render('myPurchases', {
+    title: 'My Purchases',
+    user: detailedUser,
+  });
+});
+
 exports.getMyListingsEditPage = catchAsync(async (req, res) => {
   const product = await Product.findById(req.params.id);
 

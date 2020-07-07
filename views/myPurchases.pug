@@ -1,0 +1,33 @@
+extend base
+
+block content
+    .container-xxl
+        .row
+            .col-sm-3.me-links
+                ul.nav.flex-column
+                    li.nav-item
+                        a.nav-link(href='/me/settings') My Settings
+                    li.nav-item
+                        a.nav-link(href='/me/listings') My Listings
+                    li.nav-item.active
+                        a.nav-link(href='/me/purchases') My Purchases
+                    hr
+                    li.nav-item
+                        a.nav-link My Seller's page
+            .col-sm-9.me-purchases
+                h4.mt-3 My Purchases
+                .row
+                    each purchase in user.purchases
+                        .col-md-4
+                            .card
+                                img.card-img( src=`/img/products/${purchase.product.photo}`)
+                                .card-body
+                                    -const date = `${purchase.createdAt}`.split(' GMT')[0]
+
+                                    .card-title=`Name: ${purchase.product.name}`
+                                    .card-title=`Price: $${purchase.price}`
+                                    .card-title=`Date Purchased: ${date}`
+                                    hr
+                                .card-footer.text-center.mt-3
+                                  .card-title Sold by #{purchase.product.seller.name}
+                                  img#header-user-img.rounded-circle(src=`/img/users/${purchase.product.seller.photo}`)
