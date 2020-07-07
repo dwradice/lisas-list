@@ -1,3 +1,6 @@
+const stripe = require('stripe')(
+  'sk_test_51H1z3NDnhHNdBPc2291gIDPV2pvzyzA9jWOIfdiGGMpXuZIWoXx2rsGwhUNMDMBdOzpuet8Dzt2yOr7VuuCUfvbb00FClFQVOI'
+);
 const Product = require('./../models/productModel');
 const Purchase = require('./../models/purchaseModel');
 const User = require('./../models/userModel');
@@ -5,7 +8,6 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
-  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
   // Get selected product
   const product = await Product.findById(req.params.productID);
 
@@ -37,7 +39,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createPurchaseCheckout = async session => {
+createPurchaseCheckout = async session => {
   const product = session.client_reference_id;
   const buyer = (await User.findOne({ email: session.customer_email })).id;
   const price = session.line_items[0].amount / 100;
