@@ -372,7 +372,7 @@ body {
   border: #77cef0 5px solid;
 }
 
-.modal .purchase-btn {
+/* .modal .purchase-btn {
   position: absolute;
   top: 90%;
   left: 29%;
@@ -386,7 +386,7 @@ body {
 
 .modal .purchase-btn:hover {
   color: #2e0152;
-}
+} */
 
 .modal .modal-title {
   font-size: 2rem;

@@ -76,6 +76,9 @@ block content
                                                                 i.fas.fa-star.d-inline(class=`reputation-star-${product.seller.reputation >= star ? 'active' : 'inactive'}`)
                                                         else
                                                             h6  This seller has no reviews yet
-                                                    button#purchase-btn.btn.btn-outline-primary.mx-3 Buy Now
+                                                    if user
+                                                        a.purchase-btn.btn.btn-outline-primary.mx-3(data-id=product.id) Buy Now
+                                                    else
+                                                        a.btn.btn-outline-primary.mx-3 Log In to Purchase
 
 

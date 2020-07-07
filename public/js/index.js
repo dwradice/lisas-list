@@ -5,6 +5,7 @@ import { signup } from './signup';
 import { updateSettings } from './updateSettings';
 import { updateProduct, deleteProduct, postProduct } from './editProduct';
 import { forgetPassword, resetPassword } from './resetPassword';
+import { purchaseProduct } from './stripe';
 import './masonry';
 
 // DOM ELEMENTS
@@ -18,6 +19,7 @@ const deleteProductBtn = document.querySelector('.delete-product-btn');
 const updateProductBtn = document.querySelector('.update-product-btn');
 const forgetPasswordForm = document.querySelector('.forgot-password-form');
 const resetPasswordForm = document.querySelector('.reset-password-form');
+const purchaseBtn = document.querySelectorAll('.purchase-btn');
 
 if (logOutBtn) {
   logOutBtn.addEventListener('click', logout);
@@ -133,5 +135,16 @@ if (resetPasswordForm) {
     ).value;
 
     resetPassword(password, passwordConfirm, token);
+  });
+}
+
+if (purchaseBtn) {
+  purchaseBtn.forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      e.target.textContent = 'Processing..';
+      const productID = e.target.dataset.id;
+      purchaseProduct(productID);
+    });
   });
 }
