@@ -23,7 +23,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         name: product.name,
         description: product.category,
         images: [
-          `https://lisas-list.herokuapp.com/img/products/${product.photo}`,
+          `${req.protocol}://${req.get('host')}/img/products/${product.photo}`,
         ],
         amount: product.price * 100,
         currency: 'usd',
@@ -42,7 +42,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 createPurchaseCheckout = async session => {
   const product = session.client_reference_id;
   const buyer = (await User.findOne({ email: session.customer_email })).id;
-  const price = session.line_items[0].amount / 100;
+  const price = session.display_items[0].amount / 100;
 
   await Purchase.create({ product, buyer, price });
 };
