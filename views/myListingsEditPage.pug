@@ -34,7 +34,7 @@ block content
                                 option(value='Electronics') Electronics
                                 option(value='Home') Home
                         .form-group.file-upload
-                            img#settings-product-photo.mr-3.my-3(src=`/img/products/${product.photo}`)
+                            img#settings-product-photo.mr-3.my-3(src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${product.photo}`)
                             input#edit-product-photo-upload.form-control-file.align-self-center.w-25.ml-3(type="file" accept='image/*' onchange="document.getElementById('settings-product-photo').src = window.URL.createObjectURL(this.files[0])")
                         .card-footer.text-center.mt-3
                             a.update-product-btn.btn.btn-outline-primary.mr-2(type="submit" data-id=product.id) Update

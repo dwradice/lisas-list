@@ -19,15 +19,10 @@ const reviewSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Review must refer to seller'],
     },
-    buyer: {
+    purchase: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      required: [true, 'Review must refer to buyer'],
-    },
-    product: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Product',
-      required: [true, 'Review must link to a product'],
+      ref: 'Purchase',
+      required: [true, 'Review must refer to purchase'],
     },
     createdAt: {
       type: Date,
@@ -40,20 +35,9 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-reviewSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'seller',
-  })
-    .populate({
-      path: 'buyer',
-      select: 'name',
-    })
-    .populate({
-      path: 'product',
-      select: '-seller -createdAt',
-    });
-  next();
-});
+// reviewSchema.pre(/^find/, function (next) {
+//   this.populate('seller');
+// });
 
 reviewSchema.statics.calcReputation = async function (userID) {
   const stats = await this.aggregate([

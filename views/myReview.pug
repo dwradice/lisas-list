@@ -1,0 +1,33 @@
+extend base
+
+block content
+    .container-xxl
+        .row
+            .col-sm-3.me-links
+                ul.nav.flex-column
+                    li.nav-item
+                        a.nav-link(href='/me/settings') My Settings
+                         
+                    li.nav-item
+                        a.nav-link(href='/me/listings') My Listings
+                    li.nav-item.active
+                        a.nav-link(href='/me/purchases') My Purchases
+                    hr
+                    li.nav-item
+                        a.nav-link My Seller's page
+            .col-sm-9.me-review
+                    h4.mt-3 Leave a review for #{purchase.product.seller.name}
+                    form.review-form(data-seller=purchase.product.seller.id data-purchase=purchase.id)
+                        .form-group
+                            label(for="rating") Rating
+                            select.form-control(type="rating" id="review-rating")
+                                option(value=1) 1
+                                option(value=2) 2
+                                option(value=3) 3
+                                option(value=4) 4
+                                option(value=5) 5
+                        .form-group
+                            label(for="content") Seller Review
+                            textarea#review-content.form-control
+                        .text-center.mt-3
+                            button.btn.btn-outline-primary.mr-2(type="submit") Submit Review

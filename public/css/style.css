@@ -272,7 +272,9 @@ body {
 
 .me-settings,
 .me-listings,
-.me-listings-edit {
+.me-listings-edit,
+.me-review,
+.me-purchases {
   font-family: 'Raleway';
   color: #4a4a4a;
   padding-left: 40px;
@@ -282,7 +284,9 @@ body {
 
 .me-settings h4,
 .me-listings h4,
-.me-listings-edit h4 {
+.me-listings-edit h4,
+.me-review h4,
+.me-purchases h4 {
   color: #153dac;
   font-size: 2rem;
   padding-bottom: 10px;
@@ -292,7 +296,9 @@ body {
 
 .me-settings form,
 .me-listings form,
-.me-listings-edit form {
+.me-listings-edit form,
+.me-review form,
+.me-purchases form {
   width: 75%;
   margin: auto;
 }
@@ -416,7 +422,7 @@ body {
 }
 
 .reputation-star-inactive {
-  display: none;
+  color: #999;
 }
 
 /* FOOTER */

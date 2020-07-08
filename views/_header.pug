@@ -12,11 +12,13 @@ nav#main-nav.navbar.navbar-expand-md.navbar-dark
         #myNavbar.collapse.navbar-collapse.flex-grow-1.text-right 
             ul.navbar-nav.ml-auto.flex-nowrap
                 if user
-                    img#header-user-img.rounded-circle.d-none.d-lg-block(src=`/img/users/${user.photo}`)
-                    li.nav-item
-                        a(href="/me/settings" class="nav-link m-2 menu-item") My Settings
-                    li.nav-item
-                        a(href="/me/listings" class="nav-link m-2 menu-item") My Listings
+                    img#header-user-img.rounded-circle.d-none.d-lg-block(src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/users/${user.photo}`)
+                    li.nav-item.dropdown
+                        a#navbarDropdown.dropdown-toggle(href="#" class="nav-link m-2 menu-item" data-toggle='dropdown')=user.name.split(' ')[0]
+                        .dropdown-menu(aria-labelledby='navbarDropdown')
+                            a.dropdown-item(href='/me/settings') My Settings
+                            a.dropdown-item(href='/me/listings') My Listings
+                            a.dropdown-item(href='/me/purchases') My Purchases
                     li.nav-item
                         a.nav-link-logout(href="#" class="nav-link my-2 mr-0 ml-2 menu-item") Log out
                     

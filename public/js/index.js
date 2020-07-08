@@ -6,6 +6,7 @@ import { updateSettings } from './updateSettings';
 import { updateProduct, deleteProduct, postProduct } from './editProduct';
 import { forgetPassword, resetPassword } from './resetPassword';
 import { purchaseProduct } from './stripe';
+import { createReview } from './review';
 import './masonry';
 
 // DOM ELEMENTS
@@ -20,6 +21,7 @@ const updateProductBtn = document.querySelector('.update-product-btn');
 const forgetPasswordForm = document.querySelector('.forgot-password-form');
 const resetPasswordForm = document.querySelector('.reset-password-form');
 const purchaseBtn = document.querySelectorAll('.purchase-btn');
+const reviewForm = document.querySelector('.review-form');
 
 if (logOutBtn) {
   logOutBtn.addEventListener('click', logout);
@@ -146,5 +148,18 @@ if (purchaseBtn) {
       const productID = e.target.dataset.id;
       purchaseProduct(productID);
     });
+  });
+}
+
+if (reviewForm) {
+  reviewForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const seller = e.target.dataset.seller;
+
+    const rating = document.getElementById('review-rating').value;
+    const content = document.getElementById('review-content').value;
+    const purchase = e.target.dataset.purchase;
+
+    createReview(rating, content, seller, purchase);
   });
 }

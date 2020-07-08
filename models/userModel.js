@@ -143,11 +143,11 @@ userSchema.virtual('products', {
   localField: '_id',
 });
 
-// userSchema.virtual('reviews', {
-//   ref: 'Review',
-//   foreignField: 'seller',
-//   localField: '_id',
-// });
+userSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'seller',
+  localField: '_id',
+});
 
 const User = mongoose.model('User', userSchema);
 

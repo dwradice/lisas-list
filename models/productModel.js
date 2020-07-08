@@ -37,6 +37,10 @@ const productSchema = new mongoose.Schema(
           'Product must fit into either "Art, Clothing, Electronics, Auto, or Home"',
       },
     },
+    sold: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: { virtuals: true },

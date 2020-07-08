@@ -1,12 +1,26 @@
+const aws = require('aws-sdk');
 const multer = require('multer');
-const sharp = require('sharp');
+const s3Storage = require('multer-sharp-s3');
 
 const Product = require('./../models/productModel');
 const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-const multerStorage = multer.memoryStorage();
+const s3Config = new aws.S3({
+  accessKeyId: 'AKIAICLRL7CKWIEKTIRQ',
+  secretAccessKey: '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',
+});
+
+const multerStorage = s3Storage({
+  s3: s3Config,
+  Bucket: 'lisaslist-assets/products',
+  Key: function (req, file, cb) {
+    const filename = `product-${req.user.id}-${Date.now()}.jpg`;
+    req.body.photo = filename;
+    cb(null, filename);
+  },
+});
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
@@ -23,19 +37,19 @@ const upload = multer({
 
 exports.uploadProductPhoto = upload.single('photo');
 
-exports.resizeProductPhoto = (req, res, next) => {
-  if (!req.file) return next();
+// exports.resizeProductPhoto = (req, res, next) => {
+//   if (!req.file) return next();
 
-  req.file.filename = `product-${req.user.id}-${Date.now()}.jpeg`;
-  req.body.photo = req.file.filename;
+//   req.file.filename = `product-${req.user.id}-${Date.now()}.jpeg`;
+//   req.body.photo = req.file.filename;
 
-  sharp(req.file.buffer)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/img/products/${req.file.filename}`);
+//   sharp(req.file.buffer)
+//     .toFormat('jpeg')
+//     .jpeg({ quality: 90 })
+//     .toFile(`public/img/products/${req.file.filename}`);
 
-  next();
-};
+//   next();
+// };
 
 exports.getAllProducts = factory.getAll(Product);
 exports.getProduct = factory.getOne(Product);

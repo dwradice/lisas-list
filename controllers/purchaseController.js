@@ -47,6 +47,10 @@ createPurchaseCheckout = async session => {
   await Purchase.create({ product, buyer, price });
 };
 
+updateProductCheckout = async () => {
+  await Product.findByIdAndUpdate(session.client_reference_id, { sold: true });
+};
+
 exports.checkout = (req, res, next) => {
   const signature = req.headers['stripe-signature'];
 

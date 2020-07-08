@@ -20,14 +20,20 @@ block content
                     each purchase in user.purchases
                         .col-md-4
                             .card
-                                img.card-img( src=`/img/products/${purchase.product.photo}`)
+                                img.card-img( src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${purchase.product.photo}`)
                                 .card-body
                                     -const date = `${purchase.createdAt}`.split(' GMT')[0]
 
                                     .card-title=`Name: ${purchase.product.name}`
                                     .card-title=`Price: $${purchase.price}`
                                     .card-title=`Date Purchased: ${date}`
-                                    hr
                                 .card-footer.text-center.mt-3
-                                  .card-title Sold by #{purchase.product.seller.name}
-                                  img#header-user-img.rounded-circle(src=`/img/users/${purchase.product.seller.photo}`)
+                                    .card-title Sold by #{purchase.product.seller.name}
+                                    img#header-user-img.rounded-circle(src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/users/${purchase.product.seller.photo}`)
+                                    br
+                                    if purchase.review.length > 0
+                                        each star in [1,2,3,4,5]
+                                            i.fas.fa-star.d-inline(class=`reputation-star-${purchase.review[0].rating >= star ? 'active' : 'inactive'}`)
+                                    else
+                                        a.btn.btn-outline-primary(href=`/me/review/${purchase.id}`) Leave Review
+                                

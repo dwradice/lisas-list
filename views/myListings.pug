@@ -21,7 +21,7 @@ block content
                     each product in user.products
                         .col-md-4
                             .card
-                                img.card-img( src=`/img/products/${product.photo}`)
+                                img.card-img( src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${product.photo}`)
                                 .card-body
                                     -const date = `${product.createdAt}`.split(' GMT')[0]
 
@@ -49,7 +49,7 @@ block content
                             option(value='Electronics') Electronics
                             option(value='Home') Home
                     .form-group.file-upload
-                        img#settings-product-photo.mr-3.my-3(src=`/img/products/default-product.jpg`)
+                        img#settings-product-photo.mr-3.my-3(src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/default-product.jpg`)
                         input#product-photo-upload.form-control-file.align-self-center.w-25.ml-3(type="file" accept='image/*' onchange="document.getElementById('settings-product-photo').src = window.URL.createObjectURL(this.files[0])")
                     
                     .move-button.text-center

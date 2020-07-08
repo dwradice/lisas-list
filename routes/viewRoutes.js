@@ -38,6 +38,12 @@ router.get(
   viewController.getMyPurchases
 );
 
+router.get(
+  '/me/review/:id',
+  authController.protect,
+  viewController.getMyReview
+);
+
 router.get('/login', viewController.getLoginForm);
 router.get('/signup', viewController.getSignupForm);
 router.get('/forgot-password', viewController.getForgotPassword);

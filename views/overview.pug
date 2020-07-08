@@ -46,11 +46,11 @@ block content
                         #product.grid-item
                             a(data-toggle="modal" data-target=`#product-${index}-modal`)
                                 .card.my-2.mx-2
-                                    img.card-img-top(src=`/img/products/${product.photo}`)
+                                    img.card-img-top(src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${product.photo}`)
                                     .card-body
                                         .card-title.card-name=product.name
 
-                                        -const formattedPrice = `$${Number(product.price).toLocaleString()}.00`
+                                        -const formattedPrice = `$${Number(product.price).toLocaleString()}`
                                         .card-subtitle.card-price=formattedPrice
 
 
@@ -60,7 +60,7 @@ block content
                                     .modal-body
                                         .row
                                             .col-md-6.my-auto.text-center
-                                                img#modal-img.m-3(src=`/img/products/${product.photo}`)
+                                                img#modal-img.m-3(src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${product.photo}`)
                                             .col-md-6.text-center.h-100.text-white
                                                 .product-details
                                                     .modal-title.mt-5=product.name
@@ -68,7 +68,7 @@ block content
                                                 hr
                                                 .seller-details.text-center
                                                     h4.pb-3.mt-3 Posted by...
-                                                    img.rounded-circle.pb-3(src=`/img/users/${product.seller.photo}`)
+                                                    img.rounded-circle.pb-3(src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/users/${product.seller.photo}`)
                                                     h5.pb-2=product.seller.name
                                                     .seller-reputation.pb-3
                                                         if product.seller.reputation !== -1

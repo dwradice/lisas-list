@@ -24,7 +24,7 @@ block content
                         label(for="email") Email address
                         input.form-control(type="email" id="update-email" aria-describedby="emailHelp" value=`${user.email}`)
                     .form-group.file-upload
-                        img#settings-user-photo.rounded-circle.mr-3.mt-3(src=`/img/users/${user.photo}`)
+                        img#settings-user-photo.rounded-circle.mr-3.mt-3(src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/users/${user.photo}`)
                         input#user-photo-upload.form-control-file.align-self-center.w-25.ml-3(type="file" accept='image/*' onchange="document.getElementById('settings-user-photo').src = window.URL.createObjectURL(this.files[0])")
                 
                     .move-button.text-center

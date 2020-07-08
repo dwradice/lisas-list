@@ -1,6 +1,7 @@
 const Product = require('../models/productModel');
 const User = require('../models/userModel');
 const Review = require('../models/reviewModel');
+const Purchase = require('../models/purchaseModel');
 
 const AppError = require('./../utils/appError');
 const catchAsync = require('./../utils/catchAsync');
@@ -64,6 +65,15 @@ exports.getMyPurchases = catchAsync(async (req, res) => {
   res.status(200).render('myPurchases', {
     title: 'My Purchases',
     user: detailedUser,
+  });
+});
+
+exports.getMyReview = catchAsync(async (req, res) => {
+  const purchase = await Purchase.findById(req.params.id).populate('product');
+
+  res.status(200).render('myReview', {
+    title: 'Leave a review',
+    purchase,
   });
 });
 

@@ -1,12 +1,30 @@
+const aws = require('aws-sdk');
 const multer = require('multer');
-const sharp = require('sharp');
+const s3Storage = require('multer-sharp-s3');
 
 const User = require('./../models/userModel');
 const factory = require('./handlerFactory');
 const AppError = require('./../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
-const multerStorage = multer.memoryStorage();
+const s3Config = new aws.S3({
+  accessKeyId: 'AKIAICLRL7CKWIEKTIRQ',
+  secretAccessKey: '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',
+});
+
+const multerStorage = s3Storage({
+  s3: s3Config,
+  Bucket: 'lisaslist-assets/users',
+  Key: function (req, file, cb) {
+    const filename = `user-${req.user.id}-${Date.now()}.jpg`;
+    req.body.photo = filename;
+    cb(null, filename);
+  },
+  resize: {
+    width: 500,
+    height: 500,
+  },
+});
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
@@ -22,20 +40,6 @@ const upload = multer({
 });
 
 exports.uploadUserPhoto = upload.single('photo');
-
-exports.resizeUserPhoto = (req, res, next) => {
-  if (!req.file) return next();
-
-  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
-
-  sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/img/users/${req.file.filename}`);
-
-  next();
-};
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -65,8 +69,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     );
   }
 
-  const filteredBody = filterObj(req.body, 'name', 'email');
-  if (req.file) filteredBody.photo = req.file.filename;
+  const filteredBody = filterObj(req.body, 'name', 'email', 'photo');
+  // if (req.file) filteredBody.photo = req.file.filename;
 
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,

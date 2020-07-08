@@ -12,7 +12,6 @@ router.post(
   '/postProduct',
   authController.protect,
   productController.uploadProductPhoto,
-  productController.resizeProductPhoto,
   productController.myPostings,
   productController.createProduct
 );
@@ -28,7 +27,6 @@ router
   .patch(
     authController.protect,
     productController.uploadProductPhoto,
-    productController.resizeProductPhoto,
     productController.updateProduct
   )
   .delete(productController.deleteProduct);
