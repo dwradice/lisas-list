@@ -23,7 +23,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         name: product.name,
         description: product.category,
         images: [
-          `${req.protocol}://${req.get('host')}/img/products/${product.photo}`,
+          `https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${product.photo}`,
         ],
         amount: product.price * 100,
         currency: 'usd',
@@ -47,7 +47,7 @@ createPurchaseCheckout = async session => {
   await Purchase.create({ product, buyer, price });
 };
 
-updateProductCheckout = async () => {
+updateProductCheckout = async session => {
   await Product.findByIdAndUpdate(session.client_reference_id, { sold: true });
 };
 
@@ -65,7 +65,7 @@ exports.checkout = (req, res, next) => {
     return res.status(400).send(`Webhook error : ${err.message}`);
   }
   if (event.type === 'checkout.session.completed') {
-    updateProductCheckout();
+    updateProductCheckout(event.data.object);
     createPurchaseCheckout(event.data.object);
   }
 
