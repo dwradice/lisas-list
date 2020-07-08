@@ -8,7 +8,10 @@ const catchAsync = require('./../utils/catchAsync');
 const APIFeatures = require('./../utils/apiFeatures');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Product.find().populate('seller'), req.query)
+  const features = new APIFeatures(
+    Product.find({ sold: false }).populate('seller'),
+    req.query
+  )
     .filter()
     .sort()
     .limitFields()
