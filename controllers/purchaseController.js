@@ -1,11 +1,10 @@
-const stripe = require('stripe')(
-  'sk_test_51H1z3NDnhHNdBPc2291gIDPV2pvzyzA9jWOIfdiGGMpXuZIWoXx2rsGwhUNMDMBdOzpuet8Dzt2yOr7VuuCUfvbb00FClFQVOI'
-);
 const Product = require('./../models/productModel');
 const Purchase = require('./../models/purchaseModel');
 const User = require('./../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // Get selected product

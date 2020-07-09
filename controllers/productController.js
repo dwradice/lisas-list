@@ -31,11 +31,13 @@ exports.getMyProducts = catchAsync(async (req, res, next) => {
   });
 });
 
+// CONFIGURE AWS SERVER
 const s3Config = new aws.S3({
   accessKeyId: process.env.AWS_KEY_ID,
   secretAccessKey: process.env.AWS_KEY_SECRET,
 });
 
+// SET FILENAME
 const multerStorage = s3Storage({
   s3: s3Config,
   Bucket: 'lisaslist-assets/products',
@@ -46,6 +48,7 @@ const multerStorage = s3Storage({
   },
 });
 
+// EXCLUDE NON IMAGES
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
@@ -54,6 +57,7 @@ const multerFilter = (req, file, cb) => {
   }
 };
 
+// UPLOAD TO AWS
 const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
