@@ -7,9 +7,33 @@ const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
+exports.getAllProducts = factory.getAll(Product);
+exports.getProduct = factory.getOne(Product);
+
+exports.createProduct = factory.createOne(Product);
+exports.updateProduct = factory.updateOne(Product);
+exports.deleteProduct = factory.deleteOne(Product);
+
+exports.myPostings = (req, res, next) => {
+  req.body.seller = req.user.id;
+  next();
+};
+
+exports.getMyProducts = catchAsync(async (req, res, next) => {
+  const products = await Product.find({ seller: req.user.id });
+
+  res.status(200).json({
+    status: 'success',
+    results: products.length,
+    data: {
+      data: products,
+    },
+  });
+});
+
 const s3Config = new aws.S3({
-  accessKeyId: 'AKIAICLRL7CKWIEKTIRQ',
-  secretAccessKey: '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',
+  accessKeyId: process.env.AWS_KEY_ID,
+  secretAccessKey: process.env.AWS_KEY_SECRET,
 });
 
 const multerStorage = s3Storage({
@@ -36,41 +60,3 @@ const upload = multer({
 });
 
 exports.uploadProductPhoto = upload.single('photo');
-
-// exports.resizeProductPhoto = (req, res, next) => {
-//   if (!req.file) return next();
-
-//   req.file.filename = `product-${req.user.id}-${Date.now()}.jpeg`;
-//   req.body.photo = req.file.filename;
-
-//   sharp(req.file.buffer)
-//     .toFormat('jpeg')
-//     .jpeg({ quality: 90 })
-//     .toFile(`public/img/products/${req.file.filename}`);
-
-//   next();
-// };
-
-exports.getAllProducts = factory.getAll(Product);
-exports.getProduct = factory.getOne(Product);
-
-exports.createProduct = factory.createOne(Product);
-exports.updateProduct = factory.updateOne(Product);
-exports.deleteProduct = factory.deleteOne(Product);
-
-exports.myPostings = (req, res, next) => {
-  req.body.seller = req.user.id;
-  next();
-};
-
-exports.getMyProducts = catchAsync(async (req, res, next) => {
-  const products = await Product.find({ seller: req.user.id });
-
-  res.status(200).json({
-    status: 'success',
-    results: products.length,
-    data: {
-      data: products,
-    },
-  });
-});
