@@ -50,11 +50,12 @@ if (signupForm) {
 if (userData) {
   userData.addEventListener('submit', e => {
     e.preventDefault();
+
     const form = new FormData();
     form.append('name', document.getElementById('update-name').value);
     form.append('email', document.getElementById('update-email').value);
     form.append('photo', document.getElementById('user-photo-upload').files[0]);
-
+    document.getElementById('update-settings-btn').textContent = 'Updating..';
     updateSettings(form, 'data');
   });
 }
@@ -100,6 +101,8 @@ if (updateProductBtn) {
     if (photo) {
       form.append('photo', photo);
     }
+
+    e.target.textContent = 'Processing..';
 
     updateProduct(form, id);
   });

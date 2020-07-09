@@ -30045,6 +30045,7 @@ if (userData) {
     form.append('name', document.getElementById('update-name').value);
     form.append('email', document.getElementById('update-email').value);
     form.append('photo', document.getElementById('user-photo-upload').files[0]);
+    document.getElementById('update-settings-btn').textContent = 'Updating..';
     (0, _updateSettings.updateSettings)(form, 'data');
   });
 }
@@ -30094,6 +30095,7 @@ if (updateProductBtn) {
       form.append('photo', photo);
     }
 
+    e.target.textContent = 'Processing..';
     (0, _editProduct.updateProduct)(form, id);
   });
 }

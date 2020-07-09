@@ -318,6 +318,13 @@ body {
 
 /* MY LISTINGS */
 
+#sold-tag {
+  position: absolute;
+  height: 100px;
+  top: -2%;
+  left: -2%;
+}
+
 .me-listings .card-img {
   height: 50%;
 }

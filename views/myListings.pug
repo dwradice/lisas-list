@@ -21,6 +21,8 @@ block content
                     each product in user.products
                         .col-md-4
                             .card
+                                if product.sold === true
+                                    img#sold-tag(src='/img/sold-alt.png')
                                 img.card-img( src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${product.photo}`)
                                 .card-body
                                     -const date = `${product.createdAt}`.split(' GMT')[0]
