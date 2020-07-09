@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const slugify = require('slugify');
 
 const productSchema = new mongoose.Schema(
   {
@@ -22,6 +21,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Product must have a price'],
       min: [1, 'Price must be greater than 0'],
+      max: [999999, 'Price must be less than 999,999'],
     },
     createdAt: {
       type: Date,

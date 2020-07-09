@@ -25,14 +25,15 @@ block content
                                     img#sold-tag(src='/img/sold-alt.png')
                                 img.card-img( src=`https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${product.photo}`)
                                 .card-body
-                                    -const date = `${product.createdAt}`.split(' GMT')[0]
+                                    -const date = `${product.createdAt}`.split(' 2020')[0]
 
                                     .card-title=`Name: ${product.name}`
                                     .card-title=`Category: ${product.category}`
                                     .card-title=`Price: $${product.price}`
                                     .card-title=`Date Posted: ${date}`
                                 .card-footer.text-center.mt-3 
-                                    a.btn.btn-outline-danger.ml-2(href=`/me/listings/${product.id}`) Edit / Delete
+                                    if product.sold === false
+                                        a.btn.btn-outline-danger.ml-2(href=`/me/listings/${product.id}`) Edit / Delete
                 hr
                 h4 Post a new item!
                 form.list-product

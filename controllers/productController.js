@@ -42,7 +42,7 @@ const multerStorage = s3Storage({
   s3: s3Config,
   Bucket: 'lisaslist-assets/products',
   Key: function (req, file, cb) {
-    const filename = `product-${req.user.id}-${Date.now()}.jpg`;
+    const filename = `product-${req.user.id}-${Date.now()}.jpeg`;
     req.body.photo = filename;
     cb(null, filename);
   },

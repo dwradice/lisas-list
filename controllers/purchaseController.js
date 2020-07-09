@@ -20,10 +20,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     line_items: [
       {
         name: product.name,
-        description: product.category,
-        images: [
-          `https://lisaslist-assets.s3.us-east-2.amazonaws.com/products/${product.photo}`,
-        ],
+        description: 'Use Card # 4242-4242-4242-4242 for test purchase',
         amount: product.price * 100,
         currency: 'usd',
         quantity: 1,

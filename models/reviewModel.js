@@ -35,10 +35,6 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-// reviewSchema.pre(/^find/, function (next) {
-//   this.populate('seller');
-// });
-
 reviewSchema.statics.calcReputation = async function (userID) {
   const stats = await this.aggregate([
     {
