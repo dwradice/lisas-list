@@ -25,9 +25,8 @@ const productSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: new Date(Date.now()).toLocaleString(),
+      default: new Date().toLocaleString(),
     },
-    slug: String,
     category: {
       type: String,
       required: [true, 'Product must be sorted into category'],
@@ -50,12 +49,6 @@ const productSchema = new mongoose.Schema(
 
 productSchema.index({ price: 1 });
 productSchema.index({ category: 1 });
-
-productSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
-
-  next();
-});
 
 productSchema.pre(/^find/, function (next) {
   this.populate({

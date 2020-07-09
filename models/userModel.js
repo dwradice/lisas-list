@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema(
     passwordResetExpires: Date,
     createdAt: {
       type: Date,
-      default: new Date(Date.now()).toLocaleString(),
+      default: new Date().toLocaleString(),
     },
     slug: String,
     numReviews: {
